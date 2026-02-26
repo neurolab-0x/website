@@ -67,7 +67,7 @@ const HeroSection = () => {
 
           {/* Subline */}
           <p
-            className="mt-6 max-w-md text-base leading-relaxed"
+            className="mt-6 max-w-lg text-xl leading-relaxed"
             style={{
               color: '#334155',
               opacity: isVisible ? 1 : 0,
@@ -76,7 +76,7 @@ const HeroSection = () => {
               transitionDelay: '400ms',
             }}
           >
-            We build advanced brain-monitoring technology that reads and analyses neural activity in real time.
+            See and understand your brain activity in real time.
           </p>
         </div>
 
