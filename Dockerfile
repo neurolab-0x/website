@@ -3,14 +3,14 @@ FROM node:20-slim AS build
 
 WORKDIR /app
 
-# Install pnpm if needed, or just use npm
-RUN npm install -g pnpm
+# Match the repo's pinned package manager version for deterministic builds
+RUN corepack enable && corepack prepare pnpm@10.33.0 --activate
 
 # Copy package files
 COPY package*.json pnpm-lock.yaml* ./
 
-# Install dependencies
-RUN pnpm install
+# Install dependencies from the lockfile without mutating it
+RUN pnpm install --frozen-lockfile
 
 # Copy source code
 COPY . .
