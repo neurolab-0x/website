@@ -1,37 +1,41 @@
+import { Suspense, lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import SurgicalLoader from "@/components/SurgicalLoader";
-import ProtectedRoute from "@/components/ProtectedRoute";
 import ScrollToHash from "@/components/ScrollToHash";
-import Index from "./pages/Index";
-import Shop from "./pages/Shop";
-import About from "./pages/About";
-import Careers from "./pages/Careers";
-import RoleDetail from "./pages/RoleDetail";
-import Contact from "./pages/Contact";
-import AIPlatform from "./pages/AIPlatform";
-import Blog from "./pages/Blog";
-import BlogDetail from "./pages/BlogDetail";
-import Docs from "./pages/Docs";
-import Legal from "./pages/Legal";
-import NotFound from "./pages/NotFound";
 import CookieConsent from "./components/CookieConsent";
 
-const queryClient = new QueryClient();
+const Index = lazy(() => import("./pages/Index"));
+const Shop = lazy(() => import("./pages/Shop"));
+const About = lazy(() => import("./pages/About"));
+const Careers = lazy(() => import("./pages/Careers"));
+const RoleDetail = lazy(() => import("./pages/RoleDetail"));
+const Contact = lazy(() => import("./pages/Contact"));
+const AIPlatform = lazy(() => import("./pages/AIPlatform"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogDetail = lazy(() => import("./pages/BlogDetail"));
+const Docs = lazy(() => import("./pages/Docs"));
+const Legal = lazy(() => import("./pages/Legal"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+
+const RouteLoadingFallback = () => (
+  <div className="surgical-loader" aria-hidden="true">
+    <div className="surgical-loader-bar" />
+  </div>
+);
 
 const App = () => (
   <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <SurgicalLoader />
-          <ScrollToHash />
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <SurgicalLoader />
+        <ScrollToHash />
+        <Suspense fallback={<RouteLoadingFallback />}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/shop" element={<Shop />} />
@@ -48,10 +52,10 @@ const App = () => (
             <Route path="/legal" element={<Legal />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
-        <CookieConsent />
-      </TooltipProvider>
-    </QueryClientProvider>
+        </Suspense>
+      </BrowserRouter>
+      <CookieConsent />
+    </TooltipProvider>
   </HelmetProvider>
 );
 
