@@ -1,0 +1,70 @@
+name: Security Autofix
+
+on:
+  schedule:
+    - cron: "53 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: security-autofix-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  audit-fix:
+    name: Apply pnpm Audit Fixes
+    if: github.ref == 'refs/heads/main' || github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Apply audit fixes
+        run: |
+          pnpm audit --fix --prod --ignore-unfixable || true
+          pnpm install --no-frozen-lockfile
+
+      - name: Validate updated dependency graph
+        run: |
+          pnpm run lint
+          pnpm run test
+          pnpm run build
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(security): apply pnpm audit fixes"
+          title: "chore(security): apply pnpm audit fixes"
+          body: |
+            Automated dependency updates generated from `pnpm audit --fix`.
+
+            This PR was created by the scheduled security autofix workflow after
+            applying available production dependency remediations and rerunning
+            lint, test, and build validation.
+          branch: chore/security-audit-fixes
+          delete-branch: true
+          base: main
+          labels: |
+            dependencies
+            security

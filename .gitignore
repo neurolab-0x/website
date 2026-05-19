@@ -29,3 +29,6 @@ sync-gitlab.sh
 *.sw?
 .vercel
 config.bat
+
+.agents
+.codex

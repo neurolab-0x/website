@@ -6,20 +6,20 @@
             "logo": "/uploads/rca-logo.png"
         },
         {
-            "name": "NVidia",
+            "name": "NVIDIA",
             "domain": "nvidia.com"
         },
         {
-            "name": "UPSIDEDOWN LABS",
+            "name": "Upside Down Labs",
             "domain": "upsidedownlabs.tech"
         },
         {
-            "name": "APHEZIS TECH LTD",
+            "name": "Aphezis Tech LTD",
             "domain": "aphezis.com",
             "logo": "/uploads/aphezis-logo.png"
         },
         {
-            "name": "OPENBCI",
+            "name": "OpenBCI",
             "domain": "openbci.com"
         }
     ]
