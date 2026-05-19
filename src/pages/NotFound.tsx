@@ -25,6 +25,7 @@ const NotFound = () => {
       <SEO
         title="404 - Page not found"
         description="We couldn’t find the page you are looking for."
+        noindex
       />
       <Navbar />
       <main className="flex flex-1 items-center justify-center px-6 py-20">
