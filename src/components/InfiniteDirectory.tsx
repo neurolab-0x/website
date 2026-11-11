@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { ChevronRight } from 'lucide-react';
 
-const sfPro = "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 const easing = 'cubic-bezier(0.4, 0, 0.2, 1)';
 
 const specs = [
@@ -59,7 +58,7 @@ const InfiniteDirectory = () => {
     };
 
     return (
-        <section id="research" className="bg-white px-6 py-32">
+        <section id="specifications" className="bg-background px-6 py-28 sm:py-32 transition-colors duration-300">
             <div className="mx-auto max-w-4xl">
                 {/* Section header */}
                 <div
@@ -71,28 +70,19 @@ const InfiniteDirectory = () => {
                         transition: `all 700ms ${easing}`,
                     }}
                 >
-                    <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-slate-400">
+                    <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                         Deep Tech
                     </p>
-                    <h2
-                        className="text-foreground"
-                        style={{
-                            fontFamily: sfPro,
-                            fontSize: 'clamp(28px, 4vw, 44px)',
-                            fontWeight: 600,
-                            letterSpacing: '-0.04em',
-                            lineHeight: 1.1,
-                        }}
-                    >
+                    <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground leading-tight">
                         Anatomy of Precision
                     </h2>
-                    <p className="mt-4 max-w-lg text-base leading-relaxed text-slate-500">
-                        Every subsystem engineered to clinical-grade tolerances. Tap to inspect.
+                    <p className="mt-4 max-w-lg text-base leading-relaxed text-muted-foreground">
+                        Every subsystem engineered to clinical-grade tolerances. Select to inspect hardware specifications.
                     </p>
                 </div>
 
                 {/* Directory rows */}
-                <div>
+                <div className="border-b border-border/60">
                     {specs.map((spec, i) => (
                         <DirectoryRow
                             key={spec.id}
@@ -124,8 +114,8 @@ const DirectoryRow = ({
     return (
         <div
             ref={ref}
+            className="border-t border-border/60"
             style={{
-                borderTop: '0.5px solid hsl(213 27% 84%)',
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? 'translateY(0)' : 'translateY(8px)',
                 transition: `all 600ms ${easing}`,
@@ -137,24 +127,21 @@ const DirectoryRow = ({
                 className="group flex w-full items-center justify-between py-6 text-left transition-colors duration-300"
             >
                 <div className="flex items-center gap-6">
-                    <span className="text-xs tabular-nums text-slate-400" style={{ minWidth: '20px' }}>
+                    <span className="text-xs font-mono tabular-nums text-muted-foreground" style={{ minWidth: '20px' }}>
                         {spec.index}
                     </span>
-                    <span
-                        className="text-base font-medium text-foreground transition-opacity duration-300 group-hover:opacity-60"
-                        style={{ fontFamily: sfPro, letterSpacing: '-0.01em' }}
-                    >
+                    <span className="text-base sm:text-lg font-medium text-foreground transition-opacity duration-300 group-hover:text-primary">
                         {spec.label}
                     </span>
                 </div>
                 <div className="flex items-center gap-4">
-                    <span className="hidden text-xs tabular-nums text-slate-400 sm:inline">
+                    <span className="hidden text-xs font-mono tabular-nums text-muted-foreground sm:inline">
                         {spec.stat}
                     </span>
                     <ChevronRight
                         size={16}
-                        strokeWidth={1.2}
-                        className="text-slate-400 transition-transform duration-300"
+                        strokeWidth={1.5}
+                        className="text-muted-foreground transition-transform duration-300"
                         style={{
                             transform: expanded ? 'rotate(90deg)' : 'rotate(0deg)',
                             transitionTimingFunction: easing,
@@ -173,7 +160,7 @@ const DirectoryRow = ({
                 }}
             >
                 <div className="pb-8 pl-[44px]">
-                    <p className="max-w-xl text-sm leading-relaxed text-slate-500" style={{ letterSpacing: '-0.01em' }}>
+                    <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
                         {spec.detail}
                     </p>
                 </div>

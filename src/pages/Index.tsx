@@ -9,7 +9,7 @@ import SEO from '@/components/SEO';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
       <SEO
         title="Clinical-Grade Neural Interfaces"
         description="Neurolab builds clinical-grade neural interfaces engineered for precision, safety, and the next era of human-computer interaction."
