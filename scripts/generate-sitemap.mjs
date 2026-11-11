@@ -1,7 +1,7 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
-const siteUrl = "https://neurolab.cc";
+const siteUrl = "https://www.neurolab.cc";
 const rootDir = process.cwd();
 const blogsDir = path.join(rootDir, "src", "content", "blogs");
 const careersDir = path.join(rootDir, "src", "content", "careers");

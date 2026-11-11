@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const LOADER_ROUTES = ['/shop', '/ai-platform'];
+const LOADER_ROUTES = ['/shop'];
 
 const SurgicalLoader = () => {
     const location = useLocation();
