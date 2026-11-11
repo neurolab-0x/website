@@ -10,11 +10,9 @@ const sitemapPath = path.join(rootDir, "public", "sitemap.xml");
 const staticRoutes = [
   { url: "/", priority: "1.0" },
   { url: "/about", priority: "0.8" },
-  { url: "/ai-platform", priority: "0.9" },
   { url: "/blog", priority: "0.7" },
   { url: "/careers", priority: "0.6" },
   { url: "/contact", priority: "0.5" },
-  { url: "/docs", priority: "0.7" },
   { url: "/shop", priority: "0.6" },
   { url: "/legal", priority: "0.4" },
 ];

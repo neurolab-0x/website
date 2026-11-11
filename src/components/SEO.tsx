@@ -11,7 +11,7 @@ interface SEOProps {
 }
 
 const siteName = "NeuroLab";
-const siteUrl = "https://neurolab.cc";
+const siteUrl = "https://www.neurolab.cc";
 const defaultOgImage = `${siteUrl}/hero.png`;
 
 const toAbsoluteUrl = (value?: string) => {

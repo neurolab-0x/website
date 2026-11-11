@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://neurolab.cc/sitemap.xml
+Sitemap: https://www.neurolab.cc/sitemap.xml
