@@ -12,8 +12,7 @@ const navSections = [
     links: [
       { label: 'Technology', to: '/#technology' },
       { label: 'Research', to: '/blog?category=Research' },
-      { label: 'Shop', to: '/shop' },
-      { label: 'Neurolab Platform', to: '/ai-platform' },
+      { label: 'Nexus Series', to: '/shop' },
     ],
   },
   {
@@ -28,7 +27,7 @@ const navSections = [
   {
     title: 'Resources',
     links: [
-      { label: 'Docs', to: '/docs' },
+      { label: 'Legal & Policies', to: '/legal' },
     ],
   },
 ];
