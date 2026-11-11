@@ -105,8 +105,7 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    @apply bg-background text-foreground antialiased font-sans;
   }
 
   h1,
@@ -115,8 +114,7 @@
   h4,
   h5,
   h6 {
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    letter-spacing: -0.022em;
+    @apply font-sans tracking-tight font-semibold text-foreground;
   }
 }
 
