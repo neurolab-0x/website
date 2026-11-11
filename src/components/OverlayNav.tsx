@@ -12,8 +12,7 @@ const navSections = [
     links: [
       { label: 'Technology', to: '/#technology' },
       { label: 'Research', to: '/blog?category=Research' },
-      { label: 'Shop', to: '/shop' },
-      { label: 'Neurolab Platform', to: '/ai-platform' },
+      { label: 'Nexus Series', to: '/shop' },
     ],
   },
   {
@@ -28,12 +27,10 @@ const navSections = [
   {
     title: 'Resources',
     links: [
-      { label: 'Docs', to: '/docs' },
+      { label: 'Legal & Policies', to: '/legal' },
     ],
   },
 ];
-
-const sfPro = "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 
 const OverlayNav = () => {
   const [open, setOpen] = useState(false);
@@ -94,10 +91,7 @@ const OverlayNav = () => {
       >
         {/* Top bar — mirrors Navbar height */}
         <div className="mx-auto flex h-12 w-full max-w-6xl items-center justify-between px-6">
-          <span
-            className="text-base font-semibold tracking-tight text-foreground"
-            style={{ fontFamily: sfPro }}
-          >
+          <span className="text-base font-semibold tracking-tight text-foreground">
             Neurolab
           </span>
           <button
@@ -111,7 +105,7 @@ const OverlayNav = () => {
 
         {/* Divider */}
         <div className="mx-auto w-full max-w-6xl px-6">
-          <div style={{ borderBottom: '0.5px solid hsl(213 27% 84%)' }} />
+          <div className="border-b border-border/50" />
         </div>
 
         {/* Nav content — centered */}
@@ -140,7 +134,7 @@ const OverlayNav = () => {
                       <button
                         key={link.label}
                         onClick={() => handleNavigate(link.to)}
-                        className="group flex w-full items-center gap-3 text-left transition-all duration-[600ms] active:scale-[0.98]"
+                        className="group flex w-full items-center gap-3 text-left transition-all duration-500 active:scale-[0.98]"
                         style={{
                           opacity: open && !exiting ? 1 : 0,
                           transform: open && !exiting ? 'translateY(0)' : 'translateY(12px)',
@@ -149,13 +143,9 @@ const OverlayNav = () => {
                         }}
                       >
                         <span
-                          className="text-2xl font-medium tracking-tight sm:text-3xl"
-                          style={{
-                            fontFamily: sfPro,
-                            letterSpacing: '-0.03em',
-                            color: isActive ? 'hsl(var(--foreground))' : 'hsl(var(--foreground))',
-                            opacity: isActive ? 1 : 0.6,
-                          }}
+                          className={`text-2xl font-medium tracking-tight sm:text-3xl transition-opacity ${
+                            isActive ? 'text-foreground opacity-100' : 'text-foreground/70 hover:opacity-100'
+                          }`}
                         >
                           {link.label}
                         </span>
@@ -175,7 +165,7 @@ const OverlayNav = () => {
 
         {/* Bottom bar */}
         <div className="mx-auto w-full max-w-6xl px-6 pb-8">
-          <div style={{ borderTop: '0.5px solid hsl(213 27% 84%)' }} />
+          <div className="border-t border-border/50" />
           <div className="flex items-center justify-between pt-6">
             <p className="text-xs tabular-nums text-muted-foreground">
               © {new Date().getFullYear()} Neurolab Inc.
