@@ -1,47 +1,36 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import partnerData from '@/content/partners/data.json';
 
-// Using correct type definition for dynamic list
 type Partner = { name: string; domain?: string; icon?: string; logo?: string };
 
 const PartnerLogo = ({ partner }: { partner: Partner }) => {
-    const [imgSrc, setImgSrc] = useState(partner.logo || (partner.domain ? `https://logo.clearbit.com/${partner.domain}` : ''));
-
     return (
-        <div className="flex items-center gap-3 text-slate-400 grayscale transition-all duration-300 hover:text-slate-800 hover:grayscale-0">
-            <img
-                src={imgSrc}
-                alt={`${partner.name} logo`}
-                className="h-8 w-auto object-contain rounded-sm mix-blend-multiply"
-                onError={() => {
-                    if (imgSrc.includes('clearbit')) {
-                        setImgSrc(`https://www.google.com/s2/favicons?domain=${partner.domain}&sz=128`);
-                    }
-                }}
-            />
-            <span className="text-xl font-medium">{partner.name}</span>
+        <div className="flex items-center gap-3 text-muted-foreground transition-all duration-300 hover:text-foreground">
+            {partner.logo ? (
+                <img
+                    src={partner.logo}
+                    alt={`${partner.name} logo`}
+                    className="h-7 w-auto object-contain rounded-sm filter dark:invert dark:brightness-200 transition-opacity opacity-75 hover:opacity-100"
+                />
+            ) : (
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-border/60 bg-secondary/60 text-xs font-semibold text-foreground/80">
+                    {partner.name.slice(0, 2).toUpperCase()}
+                </div>
+            )}
+            <span className="text-base sm:text-lg font-medium tracking-tight whitespace-nowrap">{partner.name}</span>
         </div>
     );
 };
 
-const PartnersSection = () => {
-    const [partners, setPartners] = useState<Partner[]>([]);
+const PartnersSection = () => {    const [partners, setPartners] = useState<Partner[]>([]);
 
-    useEffect(() => {
-        // Fetch dynamically added partners from the CMS output
-        import('@/content/partners/data.json')
-            .then((module) => {
-                if (module.partners && Array.isArray(module.partners)) {
-                    setPartners(module.partners);
-                }
-            })
-            .catch((err) => console.error("Could not load partners data:", err));
-    }, []);
+    const partners: Partner[] = partnerData.partners || [];
 
     if (partners.length === 0) return null;
 
     return (
-        <section className="border-t border-slate-100 bg-white py-24 sm:py-32">
+        <section className="border-t border-border/50 bg-background py-20 sm:py-24">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl text-center">
                     <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
@@ -52,12 +41,12 @@ const PartnersSection = () => {
                     </p>
                 </div>
 
-                <div className="mx-auto mt-16 max-w-6xl relative overflow-hidden flex" style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}>
+                <div className="mx-auto mt-12 max-w-6xl relative overflow-hidden flex" style={{ maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)' }}>
                     <motion.div
                         className="flex flex-none gap-16 pr-16"
                         animate={{ x: '-100%' }}
                         transition={{
-                            duration: 50,
+                            duration: 35,
                             repeat: Infinity,
                             ease: 'linear',
                         }}

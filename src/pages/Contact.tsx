@@ -6,7 +6,7 @@ import SEO from '@/components/SEO';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import {
   ArrowUpRight, ArrowRight, X, Copy, Check,
-  Mail, MessageCircle, Handshake, Code, FlaskConical, Users,
+  Mail, MessageCircle, Sparkles,
 } from 'lucide-react';
 
 /* ──────────────────────────────────────────────
@@ -60,12 +60,11 @@ const SalesSlideOver = ({ open, onClose }: SlideOverProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    // Simulates POST /api/partnerships
     setTimeout(() => {
       setSubmitting(false);
       setSubmitted(true);
       setTrackingId(generateId());
-    }, 1800);
+    }, 1200);
   };
 
   return (
@@ -74,116 +73,93 @@ const SalesSlideOver = ({ open, onClose }: SlideOverProps) => {
       onClick={handleBackdropClick}
       className="fixed inset-0 z-50 transition-all duration-500"
       style={{
-        background: open ? 'rgba(15, 23, 42, 0.3)' : 'transparent',
+        background: open ? 'rgba(0, 0, 0, 0.6)' : 'transparent',
         backdropFilter: open ? 'blur(4px)' : 'none',
         pointerEvents: open ? 'auto' : 'none',
         transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1.0)',
       }}
     >
       <div
-        className="absolute right-0 top-0 flex h-full w-full max-w-lg flex-col bg-background transition-transform duration-500"
+        className="absolute right-0 top-0 flex h-full w-full max-w-lg flex-col bg-background border-l border-border transition-transform duration-500 shadow-2xl"
         style={{
           transform: open ? 'translateX(0)' : 'translateX(100%)',
           transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1.0)',
-          borderLeft: '0.5px solid hsl(213 27% 84%)',
         }}
       >
         {submitting && (
-          <div className="surgical-loader absolute left-0 right-0 top-0 z-10 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+          <div className="surgical-loader absolute left-0 right-0 top-0 z-10 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent" />
         )}
 
-        <div
-          className="flex items-center justify-between px-8 py-6"
-          style={{ borderBottom: '0.5px solid hsl(213 27% 84%)' }}
-        >
-          <h2
-            className="text-foreground"
-            style={{
-              fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-              fontSize: '18px',
-              fontWeight: 500,
-              letterSpacing: '-0.02em',
-            }}
-          >
-            Sales & Partnerships
+        <div className="flex items-center justify-between px-8 py-6 border-b border-border/70">
+          <h2 className="text-lg font-semibold tracking-tight text-foreground">
+            Sales & Institutional Partnerships
           </h2>
           <button
             onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-300 hover:bg-secondary"
+            className="flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-200 hover:bg-secondary"
+            aria-label="Close dialog"
           >
-            <X size={16} strokeWidth={1.2} className="text-muted-foreground" />
+            <X size={18} className="text-muted-foreground" />
           </button>
         </div>
 
         <div className="flex-1 overflow-y-auto px-8 py-8">
           {submitted ? (
             <div className="flex h-full flex-col items-center justify-center text-center">
-              <div
-                className="mb-6 flex h-12 w-12 items-center justify-center rounded-full"
-                style={{ border: '0.5px solid hsl(213 27% 84%)' }}
-              >
-                <Check size={20} strokeWidth={1.2} className="text-foreground" />
+              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
+                <Check size={22} strokeWidth={2} />
               </div>
-              <h3
-                className="mb-2 text-foreground"
-                style={{
-                  fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                  fontSize: '24px',
-                  fontWeight: 500,
-                  letterSpacing: '-0.03em',
-                }}
-              >
+              <h3 className="mb-2 text-2xl font-bold tracking-tight text-foreground">
                 Inquiry Received
               </h3>
               <p className="mb-6 max-w-xs text-sm leading-relaxed text-muted-foreground">
-                Our partnerships team will respond within 2 business days.
+                Our clinical partnerships team will respond within 2 business days.
               </p>
-              <div className="rounded-2xl px-6 py-3" style={{ border: '0.5px solid hsl(213 27% 84%)' }}>
+              <div className="rounded-2xl border border-border bg-card px-6 py-3">
                 <p className="text-xs text-muted-foreground">Tracking ID</p>
-                <p className="mt-0.5 text-sm font-medium tabular-nums text-foreground">{trackingId}</p>
+                <p className="mt-0.5 text-sm font-mono font-medium tabular-nums text-foreground">{trackingId}</p>
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <p className="text-sm leading-relaxed text-muted-foreground">
-                For enterprise contracts, bulk device commissioning, and institutional partnerships. We'll match you with the right team.
+                For enterprise contracts, bulk device commissioning, and institutional clinical partnerships.
               </p>
-              <div className="space-y-6">
+              <div className="space-y-4">
                 <div>
-                  <label className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-slate-400">Full Name</label>
-                  <input type="text" required className="w-full bg-transparent pb-3 text-sm text-foreground outline-none placeholder:text-slate-300" style={{ borderBottom: '0.5px solid hsl(213 27% 84%)' }} placeholder="Dr. Jane Mitchell" />
+                  <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Full Name</label>
+                  <input type="text" required className="w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-primary" placeholder="Dr. Jane Mitchell" />
                 </div>
                 <div>
-                  <label className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-slate-400">Institutional Email</label>
-                  <input type="email" required className="w-full bg-transparent pb-3 text-sm text-foreground outline-none placeholder:text-slate-300" style={{ borderBottom: '0.5px solid hsl(213 27% 84%)' }} placeholder="j.mitchell@stanford.edu" />
+                  <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Institutional Email</label>
+                  <input type="email" required className="w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-primary" placeholder="j.mitchell@stanford.edu" />
                 </div>
                 <div>
-                  <label className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-slate-400">Organization</label>
-                  <input type="text" required className="w-full bg-transparent pb-3 text-sm text-foreground outline-none placeholder:text-slate-300" style={{ borderBottom: '0.5px solid hsl(213 27% 84%)' }} placeholder="Stanford Neuroscience Institute" />
+                  <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Organization / Hospital</label>
+                  <input type="text" required className="w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-primary" placeholder="Stanford Neuroscience Institute" />
                 </div>
                 <div>
-                  <label className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-slate-400">Partnership Type</label>
-                  <select required className="w-full bg-transparent pb-3 text-sm text-foreground outline-none" style={{ borderBottom: '0.5px solid hsl(213 27% 84%)' }} defaultValue="">
-                    <option value="" disabled>Select type</option>
+                  <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Partnership Type</label>
+                  <select required className="w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-primary" defaultValue="">
+                    <option value="" disabled>Select partnership tier</option>
                     <option value="enterprise">Enterprise Contract</option>
-                    <option value="clinical">Clinical Deployment</option>
-                    <option value="research">Research Collaboration</option>
-                    <option value="distribution">Distribution Partner</option>
+                    <option value="clinical">Clinical Trial Deployment</option>
+                    <option value="research">Academic Research Collaboration</option>
+                    <option value="distribution">Distribution & Supply</option>
                   </select>
                 </div>
                 <div>
-                  <label className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-slate-400">Message</label>
-                  <textarea rows={3} className="w-full resize-none bg-transparent pb-3 text-sm text-foreground outline-none placeholder:text-slate-300" style={{ borderBottom: '0.5px solid hsl(213 27% 84%)' }} placeholder="Describe your use case or requirements" />
+                  <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Message</label>
+                  <textarea rows={3} className="w-full resize-none rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-primary" placeholder="Describe your deployment scale or clinical requirements" />
                 </div>
               </div>
               <button
                 type="submit"
                 disabled={submitting}
-                className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl text-sm font-medium text-white transition-all duration-500 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50"
-                style={{ background: '#0060E9', transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1.0)' }}
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl text-sm font-semibold bg-primary text-primary-foreground shadow-md transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-50"
               >
                 {submitting ? 'Submitting…' : 'Submit Inquiry'}
-                {!submitting && <ArrowUpRight size={16} strokeWidth={1.2} />}
+                {!submitting && <ArrowUpRight size={16} />}
               </button>
             </form>
           )}
@@ -193,25 +169,8 @@ const SalesSlideOver = ({ open, onClose }: SlideOverProps) => {
   );
 };
 
-/* ──────────────────────────────────────────────
-   Reusable Card Shell
-   ────────────────────────────────────────────── */
-
-const cardBase = 'flex flex-col justify-between rounded-3xl bg-secondary transition-all duration-500';
+const cardBase = 'flex flex-col justify-between rounded-3xl bg-card border border-border/70 p-8 shadow-sm transition-all duration-300 hover:border-primary/50 hover:shadow-md';
 const cardEasing = 'cubic-bezier(0.25, 0.1, 0.25, 1.0)';
-
-const useCardHover = () => ({
-  onMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => {
-    e.currentTarget.style.borderColor = 'hsl(215 25% 70%)';
-    e.currentTarget.style.boxShadow = '0 1px 0 0 hsl(213 27% 84%)';
-  },
-  onMouseLeave: (e: React.MouseEvent<HTMLDivElement>) => {
-    e.currentTarget.style.borderColor = 'hsl(213 27% 84%)';
-    e.currentTarget.style.boxShadow = 'none';
-  },
-});
-
-const sfPro = "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 
 /* ──────────────────────────────────────────────
    Main Contact Page
@@ -222,211 +181,187 @@ const Contact = () => {
   const [copied, setCopied] = useState(false);
   const { ref: heroRef, isVisible: heroVis } = useScrollReveal(0.1);
   const { ref: gridRef, isVisible: gridVis } = useScrollReveal(0.15);
-  const hover = useCardHover();
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText('hello@neurolab.cc');
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText('hello@neurolab.cc');
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
     } catch {
-      const t = document.createElement('textarea');
-      t.value = 'hello@neurolab.cc';
-      document.body.appendChild(t);
-      t.select();
-      document.execCommand('copy');
-      document.body.removeChild(t);
+      // safe fallback without document.execCommand
     }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
       <SEO
         title="Contact Us"
-        description="Get in touch with the NeuroLab team for inquiries about our clinical-grade neural interfaces and AI platform."
+        description="Get in touch with the NeuroLab team for inquiries about our clinical-grade neural interfaces and research partnerships."
         canonical="/contact"
       />
       <Navbar />
-      <main className="pt-12">
+      <main className="pt-16">
         {/* ── HERO ── */}
         <section className="px-6">
           <div
             ref={heroRef}
-            className="mx-auto max-w-5xl py-32 sm:py-40 transition-all duration-[600ms]"
+            className="mx-auto max-w-5xl py-24 sm:py-32 transition-all duration-[600ms]"
             style={{
               opacity: heroVis ? 1 : 0,
               transform: heroVis ? 'translateY(0)' : 'translateY(16px)',
               transitionTimingFunction: cardEasing,
             }}
           >
-            <h1
-              className="text-foreground"
-              style={{
-                fontFamily: sfPro,
-                fontSize: 'clamp(36px, 6vw, 64px)',
-                fontWeight: 500,
-                letterSpacing: '-0.04em',
-                lineHeight: 1.1,
-              }}
-            >
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+              Connect With NeuroLab
+            </p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground leading-tight">
               How can we help?
             </h1>
-            <p className="mt-6 max-w-[480px] text-base leading-relaxed text-slate-500">
-              Whether you're commissioning clinical-grade hardware, need technical support for an existing deployment, or want to explore a research partnership — we'll connect you with the right team.
+            <p className="mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-muted-foreground">
+              Whether you're commissioning clinical hardware, exploring a research collaboration, or require deployment support — our engineering and partnerships teams are ready.
             </p>
           </div>
-          <div className="mx-auto max-w-5xl" style={{ borderBottom: '0.5px solid hsl(213 27% 84%)' }} />
+          <div className="mx-auto max-w-5xl border-b border-border/60" />
         </section>
 
-        {/* ── ROUTING GRID — Asymmetrical 2-column, 3 rows ── */}
-        <section className="px-6 py-24">
+        {/* ── ROUTING GRID ── */}
+        <section className="px-6 py-20 sm:py-24">
           <div
             ref={gridRef}
-            className="mx-auto max-w-5xl space-y-4 transition-all duration-[600ms]"
+            className="mx-auto max-w-5xl space-y-12 transition-all duration-[600ms]"
             style={{
               opacity: gridVis ? 1 : 0,
               transform: gridVis ? 'translateY(0)' : 'translateY(16px)',
               transitionTimingFunction: cardEasing,
             }}
           >
-
-            {/* ── PRIMARY ROW — Sales + Support ── */}
+            {/* Primary Row — Sales + Support */}
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               {/* Sales */}
-              <div
-                className={`${cardBase} px-6 py-8`}
-                style={{ border: '0.5px solid hsl(213 27% 84%)', transitionTimingFunction: cardEasing }}
-                {...hover}
-              >
+              <div className={cardBase}>
                 <div>
-                  <div className='flex gap-4 items-center'>
-                    <Mail size={22} strokeWidth={1.2} className="mb-3 text-muted-foreground" />
-                    <h3 className="mb-2 text-foreground" style={{ fontFamily: sfPro, fontSize: '20px', fontWeight: 500, letterSpacing: '-0.02em' }}>
-                      Sales
+                  <div className="flex gap-3 items-center mb-4">
+                    <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
+                      <Mail size={20} strokeWidth={2} />
+                    </div>
+                    <h3 className="text-xl font-bold tracking-tight text-foreground">
+                      Sales & Deployment
                     </h3>
-
                   </div>
                   <p className="text-base leading-relaxed text-muted-foreground">
-                    Enterprise contracts, bulk device commissioning, and clinical deployment agreements.
+                    Enterprise contracts, bulk device commissioning, and clinical institutional agreements.
                   </p>
-                  <p className="mt-2 text-xs tabular-nums text-muted-foreground">sales@neurolab.cc</p>
+                  <p className="mt-3 text-xs font-mono tabular-nums text-muted-foreground">sales@neurolab.cc</p>
                 </div>
                 <button
                   onClick={() => setSalesOpen(true)}
-                  className="mt-5 inline-flex h-10 w-full items-center justify-center gap-2 rounded-2xl text-sm font-medium text-white transition-all duration-500 hover:-translate-y-0.5 active:scale-[0.98]"
-                  style={{ background: '#0060E9', transitionTimingFunction: cardEasing }}
+                  className="mt-6 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl text-sm font-semibold bg-primary text-primary-foreground shadow-sm transition-all hover:opacity-90 active:scale-[0.98]"
                 >
                   Talk to Sales
-                  <ArrowUpRight size={16} strokeWidth={1.2} />
+                  <ArrowUpRight size={16} />
                 </button>
               </div>
 
               {/* Help & Support */}
-              <div
-                className={`${cardBase} px-6 py-8`}
-                style={{ border: '0.5px solid hsl(213 27% 84%)', transitionTimingFunction: cardEasing }}
-                {...hover}
-              >
+              <div className={cardBase}>
                 <div>
-                  <div className='flex gap-4 items-center'>
-
-                    <MessageCircle size={22} strokeWidth={1.2} className="mb-3 text-muted-foreground" />
-                    <h3 className="mb-2 text-foreground" style={{ fontFamily: sfPro, fontSize: '20px', fontWeight: 500, letterSpacing: '-0.02em' }}>
-                      Help & Support
+                  <div className="flex gap-3 items-center mb-4">
+                    <div className="p-2.5 rounded-xl bg-secondary text-foreground">
+                      <MessageCircle size={20} strokeWidth={2} />
+                    </div>
+                    <h3 className="text-xl font-bold tracking-tight text-foreground">
+                      Technical Support
                     </h3>
                   </div>
                   <p className="text-base leading-relaxed text-muted-foreground">
-                    Device troubleshooting, firmware updates, platform feedback, and clinical deployment assistance.
+                    Hardware troubleshooting, sensor calibration, firmware inquiries, and active clinical support.
                   </p>
-                  <p className="mt-2 text-xs tabular-nums text-muted-foreground">support@neurolab.cc</p>
+                  <p className="mt-3 text-xs font-mono tabular-nums text-muted-foreground">support@neurolab.cc</p>
                 </div>
                 <a
                   href="mailto:support@neurolab.cc"
-                  className="mt-5 inline-flex h-10 w-full items-center justify-center gap-2 rounded-2xl text-sm font-medium text-white transition-all duration-500 hover:-translate-y-0.5 active:scale-[0.98]"
-                  style={{ background: 'hsl(var(--foreground))', transitionTimingFunction: cardEasing }}
+                  className="mt-6 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl text-sm font-semibold border border-border bg-secondary text-foreground transition-all hover:bg-accent active:scale-[0.98]"
                 >
                   Contact Support
-                  <ArrowUpRight size={16} strokeWidth={1.2} />
+                  <ArrowUpRight size={16} />
                 </a>
               </div>
             </div>
 
-            {/* ── SECONDARY ROW — plain text blocks (no boxes) ── */}
-            <div className="grid grid-cols-1 gap-x-4 gap-y-12 pt-12 md:grid-cols-2">
-              {/* Partnerships */}
-              <div className="pl-6">
-                <h3 className="mb-2 text-foreground" style={{ fontFamily: sfPro, fontSize: '16px', fontWeight: 500, letterSpacing: '-0.01em' }}>
-                  Partnerships
+            {/* Secondary Row */}
+            <div className="grid grid-cols-1 gap-8 pt-8 border-t border-border/60 md:grid-cols-2">
+              <div className="space-y-3">
+                <h3 className="text-base font-semibold text-foreground">
+                  Institutional Partnerships
                 </h3>
-                <p className="mb-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-                  Institutional research collaborations, distribution agreements, and co-development programs.
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Hospital networks, medical schools, and research grants looking to adopt the Nexus architecture.
                 </p>
                 <button
                   onClick={() => setSalesOpen(true)}
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-opacity duration-300 hover:opacity-60"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-opacity hover:opacity-80"
                 >
-                  Talk to Sales <ArrowRight size={14} strokeWidth={1.5} />
+                  Initiate Partnership <ArrowRight size={14} />
                 </button>
               </div>
 
-              {/* General Communication */}
-              <div className="pl-6">
-                <h3 className="mb-2 text-foreground" style={{ fontFamily: sfPro, fontSize: '16px', fontWeight: 500, letterSpacing: '-0.01em' }}>
-                  General communication
+              <div className="space-y-3">
+                <h3 className="text-base font-semibold text-foreground">
+                  Direct Communications
                 </h3>
-                <p className="mb-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-                  For other queries, please get in touch with us via email.
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  For general corporate and media inquiries, reach out directly.
                 </p>
-                <div className="inline-flex items-center gap-3">
-                  <Mail size={14} strokeWidth={1.2} className="text-muted-foreground" />
-                  <span className="text-sm font-medium tabular-nums text-foreground" style={{ letterSpacing: '-0.01em' }}>
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-mono text-foreground font-medium">
                     hello@neurolab.cc
                   </span>
                   <button
                     onClick={handleCopy}
-                    className="inline-flex items-center gap-1 text-xs text-muted-foreground transition-opacity duration-300 hover:opacity-60"
+                    className="inline-flex items-center gap-1 rounded-lg border border-border px-2.5 py-1 text-xs text-muted-foreground transition-colors hover:text-foreground hover:bg-secondary"
                   >
                     {copied ? (
-                      <><Check size={12} strokeWidth={1.2} /> Copied</>
+                      <><Check size={12} className="text-emerald-500" /> Copied</>
                     ) : (
-                      <><Copy size={12} strokeWidth={1.2} /> Copy</>
+                      <><Copy size={12} /> Copy</>
                     )}
                   </button>
                 </div>
               </div>
             </div>
 
-            {/* ── TERTIARY ROW — plain text blocks (no boxes) ── */}
-            <div className="grid grid-cols-1 gap-x-4 gap-y-12 pt-12 md:grid-cols-2">
-              {/* Documentation / Developer API */}
-              <div className="pl-6">
-                <h3 className="mb-2 text-foreground" style={{ fontFamily: sfPro, fontSize: '16px', fontWeight: 500, letterSpacing: '-0.01em' }}>
-                  Documentation
+            {/* Tertiary Row */}
+            <div className="grid grid-cols-1 gap-8 pt-8 border-t border-border/60 md:grid-cols-2">
+              <div className="space-y-3">
+                <h3 className="text-base font-semibold text-foreground">
+                  Publications & Research
                 </h3>
-                <p className="mb-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-                  REST and WebSocket APIs for neural data streaming, device management, and analysis integration.
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Explore peer-reviewed studies, engineering benchmarks, and histological longevity reports.
                 </p>
                 <Link
-                  to="/docs"
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-opacity duration-300 hover:opacity-60"
+                  to="/blog"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground transition-opacity hover:opacity-75"
                 >
-                  View Docs <ArrowRight size={14} strokeWidth={1.5} />
+                  Read Publications <ArrowRight size={14} />
                 </Link>
               </div>
 
-              {/* Research */}
-              <div className="pl-6">
-                <h3 className="mb-2 text-foreground" style={{ fontFamily: sfPro, fontSize: '16px', fontWeight: 500, letterSpacing: '-0.01em' }}>
-                  Research Collaboration
+              <div className="space-y-3">
+                <h3 className="text-base font-semibold text-foreground">
+                  Join the Mission
                 </h3>
-                <p className="mb-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-                  Joint publications, IRB-approved clinical studies, and open-science data sharing.
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Explore career openings across neural engineering, clinical operations, and computational ethics.
                 </p>
                 <Link
-                  to="/about"
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-opacity duration-300 hover:opacity-60"
+                  to="/careers"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground transition-opacity hover:opacity-75"
                 >
-                  Learn More <ArrowRight size={14} strokeWidth={1.5} />
+                  Explore Careers <ArrowRight size={14} />
                 </Link>
               </div>
             </div>
@@ -440,4 +375,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
