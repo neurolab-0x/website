@@ -5,7 +5,7 @@ import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { Crosshair, ShieldCheck, Eye } from 'lucide-react';
 
 const values = [
-  { icon: Crosshair, title: 'Precision', desc: 'Micro detectio, Every measurement matters.' },
+  { icon: Crosshair, title: 'Precision', desc: 'Micro-detection accuracy: every millivolt and measurement matters.' },
   { icon: ShieldCheck, title: 'Safety', desc: 'FDA-pathway compliance, redundant fail-safes, and continuous monitoring built into every device.' },
   { icon: Eye, title: 'Openness', desc: 'Open data formats, published research, and transparent methodology. Science advances through collaboration.' },
 ];
@@ -14,9 +14,8 @@ const leaders = [
   { name: 'Asimwe Landry C. E.', role: 'Chief Executive Officer', field: 'Computational Neuroscience' },
   { name: 'Aine Dushimire', role: 'Chief Operation Officer', field: 'Neural Engineering' },
   { name: 'Prosper Mugisha', role: 'Chief Technology Officer', field: 'Clinical Neurophysiology' },
-  { name: 'Esther Hope Uhirwe', role: 'VP of Engineering', field: 'Embedded Systems' },
-  { name: 'Winny Darlene', role: 'VP of Engineering', field: 'Embedded Systems' },
-
+  { name: 'Esther Hope Uhirwe', role: 'VP of Hardware Systems', field: 'Embedded Systems' },
+  { name: 'Winny Darlene', role: 'VP of Software & Decoders', field: 'Neural Algorithms' },
 ];
 
 const About = () => {
@@ -110,10 +109,9 @@ const About = () => {
               {values.map((v) => (
                 <div
                   key={v.title}
-                  className="rounded-3xl bg-card p-8"
-                  style={{ border: '0.5px solid hsl(var(--surface-border))' }}
+                  className="rounded-3xl bg-card border border-border/70 p-8 shadow-sm"
                 >
-                  <v.icon size={24} strokeWidth={1.2} className="mb-6 text-muted-foreground" />
+                  <v.icon size={24} strokeWidth={1.5} className="mb-6 text-primary" />
                   <h3 className="mb-2 text-lg font-semibold text-foreground">{v.title}</h3>
                   <p className="text-sm leading-relaxed text-muted-foreground">{v.desc}</p>
                 </div>
@@ -123,7 +121,7 @@ const About = () => {
         </section>
 
         {/* Leadership */}
-        <section className="bg-secondary px-6 py-32">
+        <section className="bg-secondary/40 border-t border-border/50 px-6 py-32">
           <div
             ref={teamRef}
             className="mx-auto max-w-5xl transition-all duration-[600ms]"
@@ -134,22 +132,20 @@ const About = () => {
             }}
           >
             <div className="mb-12 text-center">
-              <p className="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">Leadership</p>
-              <h2 className="text-3xl font-bold tracking-display text-foreground">The Team</h2>
+              <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-primary">Leadership</p>
+              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">The Team</h2>
             </div>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {leaders.map((l) => (
                 <div
                   key={l.name}
-                  className="rounded-3xl bg-card p-8"
-                  style={{ border: '0.5px solid hsl(var(--surface-border))' }}
+                  className="rounded-3xl bg-card border border-border/70 p-8 shadow-sm"
                 >
-                  <div
-                    className="mb-6 aspect-square w-16 rounded-full bg-secondary"
-                    style={{ border: '0.5px solid hsl(var(--surface-border))' }}
-                  />
+                  <div className="mb-6 aspect-square w-14 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center font-bold text-primary text-sm">
+                    {l.name.slice(0, 2).toUpperCase()}
+                  </div>
                   <h3 className="text-base font-semibold text-foreground">{l.name}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{l.role}</p>
+                  <p className="mt-1 text-sm font-medium text-primary">{l.role}</p>
                   <p className="mt-0.5 text-xs text-muted-foreground">{l.field}</p>
                 </div>
               ))}

@@ -3,30 +3,42 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import HeroHalo from '@/components/HeroHalo';
-import { Sparkles, Check, ChevronDown, ArrowRight, ShieldCheck, Database, HardDrive, Cpu, Layers } from 'lucide-react';
+import { Sparkles, Check, ArrowRight, ShieldCheck, Database, HardDrive, Cpu, Layers } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { getProductConfig } from '@/lib/content';
 
 interface CommissionConfig {
-  edition: 'clinical' | 'enterprise' | null;
-  channels: 128 | 256 | 512 | null;
-  storage: 'local-only' | 'cloud-sync' | null;
+  edition: string | null;
+  channels: number | null;
+  storage: string | null;
 }
 
-const editions = [
-  { id: 'clinical' as const, title: 'Clinical Edition', price: 12500, desc: 'FDA-pathway compliant. Designed for clinical environments with certified safety protocols.', icon: ShieldCheck },
-  { id: 'enterprise' as const, title: 'Enterprise Edition', price: 28000, desc: 'Full-scale deployment for institutions. High-throughput data and multi-user access.', icon: Layers },
-];
+const productData = getProductConfig();
 
-const sensorOptions = [
-  { value: 128 as const, label: '128 Channels', priceOffset: 0, desc: 'Standard density. Ideal for targeted cortical mapping.', icon: Cpu },
-  { value: 256 as const, label: '256 Channels', priceOffset: 4500, desc: 'High density. Full-hemisphere coverage with sub-millimeter precision.', icon: Cpu },
-  { value: 512 as const, label: '512 Channels', priceOffset: 12000, desc: 'Ultra density. Whole-brain capture for advanced research protocols.', icon: Cpu },
-];
+const editionIcons: Record<string, typeof ShieldCheck> = {
+  clinical: ShieldCheck,
+  enterprise: Layers,
+};
 
-const storageOptions = [
-  { id: 'local-only' as const, title: 'Local-Only', priceOffset: 0, desc: 'Air-gapped operation. All processing and storage remains on-premises.', icon: HardDrive },
-  { id: 'cloud-sync' as const, title: 'Cloud-Sync (1 Year)', priceOffset: 1200, desc: 'Real-time data streaming to Neurolab Cloud with automated analysis pipelines.', icon: Database },
-];
+const editions = (productData.editions || []).map((e) => ({
+  ...e,
+  icon: editionIcons[e.id] || ShieldCheck,
+}));
+
+const sensorOptions = (productData.sensors || []).map((s) => ({
+  ...s,
+  icon: Cpu,
+}));
+
+const storageIcons: Record<string, typeof HardDrive> = {
+  'local-only': HardDrive,
+  'cloud-sync': Database,
+};
+
+const storageOptions = (productData.storage || []).map((st) => ({
+  ...st,
+  icon: storageIcons[st.id] || HardDrive,
+}));
 
 const formatPrice = (price: number) => {
   return new Intl.NumberFormat('en-US', {
@@ -36,7 +48,7 @@ const formatPrice = (price: number) => {
   }).format(price);
 };
 
-const easing: [number, number, number, number] = [0.16, 1, 0.3, 1]; // Apple-like custom easing
+const easing: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const Shop = () => {
   const [config, setConfig] = useState<CommissionConfig>({
@@ -45,6 +57,7 @@ const Shop = () => {
     storage: null,
   });
   const [showForm, setShowForm] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
