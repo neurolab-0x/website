@@ -8,48 +8,30 @@ import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { getBlogPosts, type BlogPost } from '@/lib/content';
 import { ArrowUpRight, Clock } from 'lucide-react';
 
-const sfPro =
-    "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 const cardEasing = 'cubic-bezier(0.25, 0.1, 0.25, 1.0)';
-
 const categories = ['All', 'Engineering', 'Clinical', 'Research', 'Product', 'Company'] as const;
 
-const categoryColors: Record<string, string> = {
-    Engineering: 'bg-blue-50 text-blue-600',
-    Clinical: 'bg-emerald-50 text-emerald-600',
-    Research: 'bg-violet-50 text-violet-600',
-    Product: 'bg-amber-50 text-amber-600',
-    Company: 'bg-slate-100 text-slate-600',
+export const categoryColors: Record<string, string> = {
+    Engineering: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20',
+    Clinical: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20',
+    Research: 'bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20',
+    Product: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20',
+    Company: 'bg-secondary text-muted-foreground border border-border/60',
 };
 
 /* ── Blog Card ── */
 const BlogCard = ({ post, featured = false }: { post: BlogPost; featured?: boolean }) => {
     return (
         <article
-            className={`group flex flex-col overflow-hidden rounded-3xl bg-secondary transition-all duration-500 ${featured ? 'md:col-span-2 md:flex-row' : ''
-                }`}
-            style={{
-                border: '0.5px solid hsl(213 27% 84%)',
-                transitionTimingFunction: cardEasing,
-            }}
-            onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'hsl(215 25% 70%)';
-                e.currentTarget.style.boxShadow = '0 4px 24px 0 hsl(213 27% 84% / 0.4)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'hsl(213 27% 84%)';
-                e.currentTarget.style.boxShadow = 'none';
-                e.currentTarget.style.transform = 'translateY(0)';
-            }}
+            className={`group flex flex-col overflow-hidden rounded-3xl bg-card border border-border/70 text-card-foreground shadow-sm transition-all duration-300 hover:border-primary/50 hover:shadow-md ${
+                featured ? 'md:col-span-2 md:flex-row' : ''
+            }`}
         >
             {/* Thumbnail */}
             <div
-                className={`relative overflow-hidden bg-card ${featured ? 'md:w-1/2' : 'aspect-[16/9] w-full'
-                    }`}
-                style={{
-                    minHeight: featured ? '320px' : undefined,
-                }}
+                className={`relative overflow-hidden bg-secondary/50 ${
+                    featured ? 'md:w-1/2 min-h-[280px]' : 'aspect-[16/9] w-full'
+                }`}
             >
                 {post.thumbnail ? (
                     <img
@@ -58,22 +40,14 @@ const BlogCard = ({ post, featured = false }: { post: BlogPost; featured?: boole
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                 ) : (
-                    <>
-                        <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-200" />
-                        <div
-                            className="absolute inset-0 opacity-[0.03]"
-                            style={{
-                                backgroundImage:
-                                    "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",
-                            }}
-                        />
-                        {/* Decorative neural pattern */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="h-24 w-24 rounded-full border border-slate-300/40 opacity-40" />
-                            <div className="absolute h-16 w-16 rounded-full border border-slate-300/30 opacity-30" />
-                            <div className="absolute h-32 w-32 rounded-full border border-slate-300/20 opacity-20" />
-                        </div>
-                    </>
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-secondary/80 to-card">
+                        <div className="h-24 w-24 rounded-full border border-primary/20 opacity-30" />
+                        <div className="absolute h-16 w-16 rounded-full border border-primary/30 opacity-40" />
+                        <div className="absolute h-32 w-32 rounded-full border border-primary/10 opacity-20" />
+                        <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/60">
+                            NeuroLab Research
+                        </span>
+                    </div>
                 )}
             </div>
 
@@ -82,46 +56,42 @@ const BlogCard = ({ post, featured = false }: { post: BlogPost; featured?: boole
                 <div>
                     <div className="mb-4 flex items-center gap-3">
                         <span
-                            className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${categoryColors[post.category] || 'bg-slate-100 text-slate-600'
-                                }`}
+                            className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${
+                                categoryColors[post.category] || 'bg-secondary text-muted-foreground border border-border/60'
+                            }`}
                         >
                             {post.category}
                         </span>
                     </div>
 
                     <h3
-                        className={`mb-3 text-foreground transition-opacity duration-300 group-hover:opacity-80 ${featured ? 'text-2xl sm:text-3xl' : 'text-lg'
-                            }`}
-                        style={{
-                            fontFamily: sfPro,
-                            fontWeight: 500,
-                            letterSpacing: '-0.02em',
-                            lineHeight: 1.25,
-                        }}
+                        className={`mb-3 font-bold tracking-tight text-foreground transition-colors duration-200 group-hover:text-primary ${
+                            featured ? 'text-2xl sm:text-3xl leading-snug' : 'text-lg leading-snug'
+                        }`}
                     >
                         {post.title}
                     </h3>
 
                     <p
-                        className={`leading-relaxed text-muted-foreground ${featured ? 'text-base' : 'text-sm'
-                            }`}
+                        className={`leading-relaxed text-muted-foreground ${
+                            featured ? 'text-base' : 'text-sm line-clamp-2'
+                        }`}
                     >
                         {post.excerpt}
                     </p>
                 </div>
 
-                <div className="mt-6 flex items-center justify-between">
+                <div className="mt-6 flex items-center justify-between border-t border-border/40 pt-4">
                     <div className="flex items-center gap-4 text-xs text-muted-foreground">
                         <span className="tabular-nums">{post.date}</span>
                         <span className="flex items-center gap-1">
-                            <Clock size={11} strokeWidth={1.5} />
+                            <Clock size={12} strokeWidth={1.5} />
                             {post.readTime}
                         </span>
                     </div>
-                    <Link to={`/blog/${post.slug}`}>
-                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-card transition-all duration-300 group-hover:bg-foreground group-hover:text-background"
-                            style={{ border: '0.5px solid hsl(213 27% 84%)' }}>
-                            <ArrowUpRight size={13} strokeWidth={1.5} />
+                    <Link to={`/blog/${post.slug}`} aria-label={`Read ${post.title}`}>
+                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-foreground transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
+                            <ArrowUpRight size={14} strokeWidth={1.5} />
                         </div>
                     </Link>
                 </div>
@@ -135,7 +105,6 @@ const Blog = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    // Initialize activeCategory from URL if present and valid
     const getInitialCategory = React.useCallback(() => {
         const params = new URLSearchParams(location.search);
         const urlCat = params.get('category');
@@ -156,49 +125,36 @@ const Blog = () => {
             : getBlogPosts().filter((p) => p.category === activeCategory);
 
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
             <SEO
-                title="Blog"
+                title="Publications & Research"
                 description="Insights, engineering deep-dives, and clinical milestones from the NeuroLab team."
                 canonical="/blog"
             />
             <Navbar />
-            <main className="pt-12">
+            <main className="pt-16">
                 {/* ── HERO ── */}
                 <section className="px-6">
                     <div
                         ref={heroRef}
-                        className="mx-auto max-w-5xl py-28 sm:py-36 transition-all duration-[600ms]"
+                        className="mx-auto max-w-5xl py-20 sm:py-28 transition-all duration-[600ms]"
                         style={{
                             opacity: heroVis ? 1 : 0,
                             transform: heroVis ? 'translateY(0)' : 'translateY(16px)',
                             transitionTimingFunction: cardEasing,
                         }}
                     >
-                        <p className="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                            Blog
+                        <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-primary">
+                            NeuroLab Research
                         </p>
-                        <h1
-                            className="text-foreground"
-                            style={{
-                                fontFamily: sfPro,
-                                fontSize: 'clamp(36px, 6vw, 64px)',
-                                fontWeight: 500,
-                                letterSpacing: '-0.04em',
-                                lineHeight: 1.1,
-                            }}
-                        >
-                            Updates
+                        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground leading-tight">
+                            Publications & Milestones
                         </h1>
-                        <p className="mt-6 max-w-[520px] text-base leading-relaxed text-muted-foreground">
-                            The latest from the Neurolab team — engineering deep-dives, clinical milestones,
-                            research breakthroughs, and product announcements.
+                        <p className="mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-muted-foreground">
+                            The latest engineering deep-dives, clinical trial updates, biocompatibility findings, and algorithmic breakthroughs from our team.
                         </p>
                     </div>
-                    <div
-                        className="mx-auto max-w-5xl"
-                        style={{ borderBottom: '0.5px solid hsl(213 27% 84%)' }}
-                    />
+                    <div className="mx-auto max-w-5xl border-b border-border/60" />
                 </section>
 
                 {/* ── FILTER PILLS ── */}
@@ -215,20 +171,11 @@ const Blog = () => {
                                         navigate(`/blog?category=${cat}`);
                                     }
                                 }}
-                                className="rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-300"
-                                style={{
-                                    background:
-                                        activeCategory === cat ? 'hsl(var(--foreground))' : 'transparent',
-                                    color:
-                                        activeCategory === cat
-                                            ? 'hsl(var(--background))'
-                                            : 'hsl(var(--muted-foreground))',
-                                    border:
-                                        activeCategory === cat
-                                            ? '0.5px solid hsl(var(--foreground))'
-                                            : '0.5px solid hsl(213 27% 84%)',
-                                    transitionTimingFunction: cardEasing,
-                                }}
+                                className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all duration-200 ${
+                                    activeCategory === cat
+                                        ? 'bg-primary text-primary-foreground shadow-sm'
+                                        : 'bg-secondary/60 text-muted-foreground border border-border/60 hover:text-foreground hover:bg-secondary'
+                                }`}
                             >
                                 {cat}
                             </button>
@@ -259,8 +206,8 @@ const Blog = () => {
 
                         {filtered.length === 0 && (
                             <div className="py-24 text-center">
-                                <p className="text-lg text-muted-foreground">
-                                    No posts in this category yet.
+                                <p className="text-base text-muted-foreground">
+                                    No publications found in this category.
                                 </p>
                             </div>
                         )}
