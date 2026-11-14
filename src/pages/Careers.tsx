@@ -29,24 +29,15 @@ const DepartmentBlock = ({ dept }: { dept: Department }) => {
       {/* Department header — top border line */}
       <button
         onClick={() => setExpanded(!expanded)}
-        className="flex w-full items-center justify-between py-10 text-left transition-colors duration-300 hover:opacity-80"
-        style={{ borderTop: '0.5px solid hsl(213 27% 84%)' }}
+        className="flex w-full items-center justify-between py-10 text-left transition-colors duration-300 hover:opacity-80 border-t border-border/70"
       >
-        <h3
-          className="text-foreground"
-          style={{
-            fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-            fontSize: 'clamp(20px, 2.5vw, 28px)',
-            fontWeight: 500,
-            letterSpacing: '-0.03em',
-          }}
-        >
+        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-foreground">
           {dept.name}
         </h3>
         {expanded ? (
-          <Minus size={20} strokeWidth={1} className="shrink-0 text-foreground" />
+          <Minus size={20} strokeWidth={1.5} className="shrink-0 text-foreground" />
         ) : (
-          <Plus size={20} strokeWidth={1} className="shrink-0 text-foreground" />
+          <Plus size={20} strokeWidth={1.5} className="shrink-0 text-foreground" />
         )}
       </button>
 

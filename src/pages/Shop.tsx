@@ -326,36 +326,57 @@ const Shop = () => {
                   transition={{ duration: 0.6, ease: easing }}
                   className="space-y-6 pt-8 border-t border-border/50 overflow-hidden"
                 >
-                  <h2 className="text-2xl font-bold tracking-tight">Contact Information</h2>
-                  <p className="text-sm text-muted-foreground">Our deployment team will reach out to finalize compliance checks and installation dates.</p>
+                  <h2 className="text-2xl font-bold tracking-tight">Institutional Intake</h2>
+                  <p className="text-sm text-muted-foreground">Our deployment team will reach out to finalize compliance verification, shipping schedules, and calibration certificates.</p>
 
-                  <form className="space-y-5 mt-6" onSubmit={(e) => { e.preventDefault(); alert("Mock commission requested! Continuing development.") }}>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-xs font-medium text-muted-foreground mb-1.5 block ml-1">First Name</label>
-                        <input type="text" className="w-full rounded-xl bg-secondary/50 border border-border/50 px-4 py-3.5 text-sm outline-none transition-colors focus:border-primary/50 focus:bg-card" required />
+                  {submitted ? (
+                    <div className="rounded-2xl border border-primary/30 bg-primary/5 p-8 text-center animate-fade-in">
+                      <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <Check size={24} strokeWidth={2.5} />
                       </div>
-                      <div>
-                        <label className="text-xs font-medium text-muted-foreground mb-1.5 block ml-1">Last Name</label>
-                        <input type="text" className="w-full rounded-xl bg-secondary/50 border border-border/50 px-4 py-3.5 text-sm outline-none transition-colors focus:border-primary/50 focus:bg-card" required />
-                      </div>
+                      <h3 className="text-xl font-bold text-foreground">Commission Request Received</h3>
+                      <p className="mt-2 text-sm text-muted-foreground max-w-sm mx-auto">
+                        Your custom Nexus specification has been logged. Our clinical engineering team will contact you within 24 hours.
+                      </p>
+                      <p className="mt-4 text-xs font-mono text-primary font-semibold">
+                        Reference: NX-{Date.now().toString(36).toUpperCase()}
+                      </p>
                     </div>
-                    <div>
-                      <label className="text-xs font-medium text-muted-foreground mb-1.5 block ml-1">Institutional Email</label>
-                      <input type="email" placeholder="name@university.edu or name@hospital.org" className="w-full rounded-xl bg-secondary/50 border border-border/50 px-4 py-3.5 text-sm outline-none transition-colors focus:border-primary/50 focus:bg-card" required />
-                    </div>
-                    <div>
-                      <label className="text-xs font-medium text-muted-foreground mb-1.5 block ml-1">Additional Requirements</label>
-                      <textarea rows={3} className="w-full resize-none rounded-xl bg-secondary/50 border border-border/50 px-4 py-3.5 text-sm outline-none transition-colors focus:border-primary/50 focus:bg-card" />
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="w-full rounded-xl bg-foreground text-background font-medium py-4 text-sm mt-4 hover:bg-foreground/90 transition-colors shadow-lg active:scale-[0.98]"
+                  ) : (
+                    <form
+                      className="space-y-5 mt-6"
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        setSubmitted(true);
+                      }}
                     >
-                      Submit Commission Request
-                    </button>
-                  </form>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="text-xs font-medium text-muted-foreground mb-1.5 block ml-1">First Name</label>
+                          <input type="text" className="w-full rounded-xl bg-secondary/50 border border-border/50 px-4 py-3.5 text-sm outline-none transition-colors focus:border-primary/50 focus:bg-card" required />
+                        </div>
+                        <div>
+                          <label className="text-xs font-medium text-muted-foreground mb-1.5 block ml-1">Last Name</label>
+                          <input type="text" className="w-full rounded-xl bg-secondary/50 border border-border/50 px-4 py-3.5 text-sm outline-none transition-colors focus:border-primary/50 focus:bg-card" required />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="text-xs font-medium text-muted-foreground mb-1.5 block ml-1">Institutional Email</label>
+                        <input type="email" placeholder="name@university.edu or name@hospital.org" className="w-full rounded-xl bg-secondary/50 border border-border/50 px-4 py-3.5 text-sm outline-none transition-colors focus:border-primary/50 focus:bg-card" required />
+                      </div>
+                      <div>
+                        <label className="text-xs font-medium text-muted-foreground mb-1.5 block ml-1">Additional Research Requirements</label>
+                        <textarea rows={3} className="w-full resize-none rounded-xl bg-secondary/50 border border-border/50 px-4 py-3.5 text-sm outline-none transition-colors focus:border-primary/50 focus:bg-card" placeholder="Specify clinical target or integration protocols" />
+                      </div>
+
+                      <button
+                        type="submit"
+                        className="w-full rounded-xl bg-primary text-primary-foreground font-semibold py-4 text-sm mt-4 hover:opacity-90 transition-opacity shadow-lg active:scale-[0.98]"
+                      >
+                        Submit Commission Request
+                      </button>
+                    </form>
+                  )}
                 </motion.section>
               )}
             </AnimatePresence>
@@ -363,6 +384,8 @@ const Shop = () => {
           </div>
         </div>
       </main>
+
+      <Footer />
 
       {/* Sticky Bottom Action Bar (Apple Style) */}
       <AnimatePresence>

@@ -15,21 +15,23 @@ const RoleDetail = () => {
 
     if (!result) {
         return (
-            <div className="min-h-screen bg-background">
+            <div className="min-h-screen bg-background text-foreground flex flex-col justify-between">
+                <SEO title="Role Not Found" noindex />
                 <Navbar />
-                <main className="flex min-h-screen items-center justify-center px-6 pt-12">
-                    <div className="text-center">
-                        <h1 className="mb-4 text-2xl font-semibold text-foreground">Role Not Found</h1>
-                        <p className="mb-8 text-sm text-muted-foreground">This position may have been filled or removed.</p>
+                <main className="flex flex-1 items-center justify-center px-6 py-28">
+                    <div className="text-center max-w-md">
+                        <h1 className="mb-4 text-3xl font-bold tracking-tight text-foreground">Role Not Found</h1>
+                        <p className="mb-8 text-base text-muted-foreground">This position has been filled or is no longer accepting submissions.</p>
                         <Link
                             to="/careers"
-                            className="inline-flex items-center gap-2 text-sm font-medium text-foreground transition-opacity duration-300 hover:opacity-60"
+                            className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold bg-primary text-primary-foreground shadow-sm transition-all hover:opacity-90"
                         >
-                            <ArrowLeft size={16} strokeWidth={1.2} />
-                            Back to All Roles
+                            <ArrowLeft size={16} />
+                            View Open Positions
                         </Link>
                     </div>
                 </main>
+                <Footer />
             </div>
         );
     }
@@ -75,16 +77,7 @@ const RoleDetail = () => {
                         </p>
 
                         {/* Title */}
-                        <h1
-                            className="text-foreground"
-                            style={{
-                                fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                                fontSize: 'clamp(32px, 5vw, 56px)',
-                                fontWeight: 500,
-                                letterSpacing: '-0.04em',
-                                lineHeight: 1.1,
-                            }}
-                        >
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-[1.15]">
                             {role.title}
                         </h1>
 
