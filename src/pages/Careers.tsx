@@ -120,33 +120,21 @@ const Careers = () => {
               />
             </div>
 
-            <h1
-              className="relative z-10 text-foreground"
-              style={{
-                fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                fontSize: 'clamp(48px, 8vw, 84px)',
-                fontWeight: 500,
-                letterSpacing: '-0.06em',
-                lineHeight: 1.0,
-              }}
-            >
+            <h1 className="relative z-10 text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-foreground leading-[1.05]">
               Join the
               <br />
               Frontier.
             </h1>
-            <p className="relative z-10 mt-8 max-w-[600px] text-lg leading-relaxed text-slate-500">
+            <p className="relative z-10 mt-8 max-w-[600px] text-lg leading-relaxed text-muted-foreground">
               We build clinical-grade neural interfaces at the intersection of neuroscience, precision engineering, and computational ethics. If you think in first principles and build for the long term, we'd like to hear from you.
             </p>
           </div>
           {/* Hero bottom border */}
-          <div
-            className="mx-auto max-w-6xl"
-            style={{ borderBottom: '0.5px solid hsl(213 27% 84%)' }}
-          />
+          <div className="mx-auto max-w-6xl border-b border-border/60" />
         </section>
 
         {/* ── THE CHANGE WE SEEK ── */}
-        <section className="px-6 py-32">
+        <section className="px-6 py-28 sm:py-32">
           <div
             ref={whyRef}
             className="mx-auto max-w-6xl transition-all duration-[600ms]"
@@ -156,19 +144,10 @@ const Careers = () => {
               transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1.0)',
             }}
           >
-            <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-              The Change We Seek
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+              The Mission
             </p>
-            <h2
-              className="max-w-3xl text-foreground"
-              style={{
-                fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                fontSize: 'clamp(24px, 3.5vw, 40px)',
-                fontWeight: 500,
-                letterSpacing: '-0.04em',
-                lineHeight: 1.2,
-              }}
-            >
+            <h2 className="max-w-3xl text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground leading-snug">
               We are redefining the interface between human thought and digital action. We don't just build products; we build icons of clinical precision.
             </h2>
           </div>
@@ -178,10 +157,10 @@ const Careers = () => {
         <section className="px-6 pb-32">
           <div className="mx-auto max-w-6xl">
             <div className="mb-16 flex items-baseline justify-between">
-              <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                 Open Departments
               </p>
-              <p className="text-xs tabular-nums text-muted-foreground">
+              <p className="text-xs font-mono tabular-nums text-muted-foreground">
                 {getDepartments().reduce((sum, d) => sum + d.roles.length, 0)} open roles
               </p>
             </div>
@@ -191,7 +170,7 @@ const Careers = () => {
             ))}
 
             {/* Final bottom border */}
-            <div style={{ borderTop: '0.5px solid hsl(213 27% 84%)' }} />
+            <div className="border-t border-border/60" />
           </div>
         </section>
 
@@ -207,18 +186,10 @@ const Careers = () => {
             }}
           >
             <div className="py-16 text-center">
-              <p className="mb-2 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                 Don't See Your Role?
               </p>
-              <h3
-                className="mb-3 text-foreground"
-                style={{
-                  fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                  fontSize: 'clamp(20px, 2.5vw, 28px)',
-                  fontWeight: 500,
-                  letterSpacing: '-0.03em',
-                }}
-              >
+              <h3 className="mb-3 text-xl sm:text-2xl font-bold tracking-tight text-foreground">
                 We're always looking for exceptional minds.
               </h3>
               <p className="mx-auto mb-8 max-w-md text-sm leading-relaxed text-muted-foreground">
@@ -226,9 +197,13 @@ const Careers = () => {
               </p>
               <Link
                 to="/contact"
-                className="inline-flex h-11 items-center gap-2 rounded-2xl px-8 text-sm font-medium text-white transition-all duration-500 hover:-translate-y-0.5 active:scale-[0.98]"
-                style={{ background: '#0060E9', transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1.0)' }}
+                className="inline-flex h-11 items-center gap-2 rounded-full px-8 text-sm font-semibold bg-primary text-primary-foreground shadow-sm transition-all hover:opacity-90 active:scale-[0.98]"
               >
+                Get in Touch
+              </Link>
+            </div>
+          </div>
+        </section>
                 General Inquiry
                 <ArrowUpRight size={16} strokeWidth={1.2} />
               </Link>
