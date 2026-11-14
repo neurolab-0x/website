@@ -204,14 +204,9 @@ const Careers = () => {
             </div>
           </div>
         </section>
-                General Inquiry
-                <ArrowUpRight size={16} strokeWidth={1.2} />
-              </Link>
-            </div>
-          </div>
-        </section>
       </main>
       <Footer />
+
     </div>
   );
 };

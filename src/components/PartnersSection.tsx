@@ -23,7 +23,7 @@ const PartnerLogo = ({ partner }: { partner: Partner }) => {
     );
 };
 
-const PartnersSection = () => {    const [partners, setPartners] = useState<Partner[]>([]);
+const PartnersSection = () => {
 
     const partners: Partner[] = partnerData.partners || [];
 
